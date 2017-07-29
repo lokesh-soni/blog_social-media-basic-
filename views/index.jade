@@ -1,0 +1,83 @@
+extends layout
+
+block content
+	button#myBtn(onclick='topFunction()', title='Go to top') Top
+	.container
+
+		.row
+			.col-sm-8.blog-main
+				if posts 
+				each post, i in posts			
+					.card
+						a.blog-headings(href='/posts/show/#{post._id}') #{post.title}
+						p.blog-post-meta
+							|  #{moment(post.date).format("DD MMM,YYYY")} at #{moment(post.date).format("H:m")} by 
+							a(href='/#{post.author_username}') #{post.author_name}
+							!=truncatedText(post.body, 300)
+							a.h6(href='/posts/show/#{post._id}') Read More
+						hr
+						| 
+						img(src='../images/likes.png', width='20', height='20')
+						| 
+						img(src='../images/cmnt.png', width='20', height='20')
+						| 
+						a(href='#')
+							img(src='../images/share2.png', width='20', height='20')
+						hr
+						if post.comments
+							each comment, i in post.comments
+								.media
+									.media-left
+										a(href='#')
+											img.media-object(src='../images/loki.jpg',alt='#{comment.name}', width='40', height='40')
+									.media-body
+										h5.media-heading #{comment.name} at #{moment(comment.commentdate).format("H:m")}
+										p #{comment.body}
+
+						hr
+
+						if user
+							form.comment-form(method='post', action='/posts/addcomment')
+								input(name='postid', type='hidden', value='#{post._id}')
+								input(name='name', type='hidden', value='#{user.name}')
+								input(name='username', type='hidden', value='#{user.username}')
+								.form-group
+									input.form-control(name='body', type='text', id='body', placeholder='Write comment...')
+						else
+							p.meta Please Login to Comment					
+				else
+					p.noposts There are no posts to display.
+
+				nav
+					ul.pager
+						li
+							a(href='#') Previous
+						li
+							a(href='#') Next
+			.col-sm-3.col-sm-offset-1.blog-sidebar
+				if posts
+					if user
+						.sidebar-module
+							.profile_card
+								img(src='../images/loki.jpg', style='width:100%')
+								.contain
+									h1.c #{user.name}
+									p.titl #{user.position}, #{user.comp}
+									p #{user.institute}
+									if user.insta
+										a.b(href='#{user.insta}')
+											i.fa.fa-instagram
+									if user.twit
+										a.b(href='#{user.twit}')
+											i.fa.fa-twitter
+									if user.linkedin
+										a.b(href='#{user.linkedin}')
+											i.fa.fa-linkedin
+									if user.fb
+										a.b(href='#user.fb')
+											i.fa.fa-facebook
+									p 
+										if user
+											a.butto(href='/posts/editprofile/#{user.id}') Edit Profile
+										else
+											a.butto(mailto='#{user.email}') Contact

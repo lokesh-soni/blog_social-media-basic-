@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+	h2.page-header.container Account Login
+	.container
+		form(method='post', action='/users/login')
+			.form-group
+				label Username
+				input.form-control(type='text', name='username', placeholder='Username')
+			.form-group
+				label Password
+				input.form-control(type='password', name='password', placeholder='Password')
+			button.btn.btn-default(type='submit') Submit
+
+			hr

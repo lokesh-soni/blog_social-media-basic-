@@ -1,0 +1,42 @@
+extends layout
+
+block content
+	.container
+		.containers
+			.show
+				h1 #{post.title}
+				p.blog-post-meta 
+					| by 
+					a(href='/posts/show/#{post.author_username}') #{post.author_name}
+					on  #{moment(post.date).format("DD,MMM YYYY")}
+				!=post.body
+					hr
+					| 
+					img(src='/images/likes.png', width='20', height='20')
+					| 
+					img(src='/images/cmnt.png', width='20', height='20')
+					| 
+					a(href='#')
+						img(src='/images/share2.png', width='20', height='20')
+					hr
+					if post.comments
+						each comment, i in post.comments
+							.media
+								.media-left
+									a(href='#')
+										img.media-object(src='/images/loki.jpg',alt='#{comment.name}', width='40', height='40')
+								.media-body
+									h5.media-heading #{comment.name}
+									p #{comment.body}
+
+					hr
+
+					if user
+						form.comment-form(method='post', action='/posts/addcomment')
+							input(name='postid', type='hidden', value='#{post._id}')
+							input(name='name', type='hidden', value='#{user.name}')
+							input(name='username', type='hidden', value='#{user.username}')
+							.form-group
+								input.form-control(name='body', type='text', id='body', placeholder='Write comment...')
+					else
+						p.meta Please Login to Comment			

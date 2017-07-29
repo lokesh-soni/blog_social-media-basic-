@@ -1,0 +1,48 @@
+extends layout
+
+block content
+	.container
+		.panel.panel-default
+			.panel-heading
+				if user
+					h3.panel-title #{user.name}
+			.panel-body
+				.row
+					form(method='post', action='/posts/editprofile')
+						input(name='uid', type='hidden', value='#{user.id}')
+						.col-md-3
+							.text-center
+							img.avatar.img-circle.img-responsive(src='/images/loki.jpg', alt='avatar', width = '100', height= '100')
+						.col-md-9
+							h4 Personal info
+							.form-group
+								label.col-lg-3.control-label Company:
+								.col-lg-8
+									input.form-control(name='comp', type='text', placeholder= 'Company')
+							.form-group
+								label.col-lg-3.control-label Designation:
+								.col-lg-8
+									input.form-control(name='position', type='text', placeholder= 'Designation')
+							.form-group
+								label.col-lg-3.control-label Institute:
+								.col-lg-8
+									input.form-control(name='institute', type='text', placeholder= 'Graduation School')
+							.form-group
+								label.col-lg-3.control-label Instagram:
+								.col-lg-8
+									input.form-control(name='insta', type='text', placeholder= 'Connect to your Instagram account here')
+							.form-group
+								label.col-lg-3.control-label Twitter:
+								.col-lg-8
+									input.form-control(name='twit', type='text', placeholder= 'Connect to your Twitter account here')
+							.form-group
+								label.col-lg-3.control-label Linkedin:
+								.col-lg-8
+									input.form-control(name='linkedin', type='text', placeholder= 'Connect to your Linkedin account here')
+							.form-group
+								label.col-lg-3.control-label Facebook:
+								.col-lg-8
+									input.form-control(name='fb', type='text', placeholder= 'Connect to your Facebook account here')
+									br
+								.col-md-8
+									input.btn.btn-primary(type='submit', value='Save')

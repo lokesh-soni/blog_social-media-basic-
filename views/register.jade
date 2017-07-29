@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h2.page-header.container Register
+  if errors
+    each error, i in errors
+      .alert.alert-danger #{msg}
+  .container
+    form(method='post', action='/users/register')
+      .form-group
+        label Name
+        input.form-control(type='text', placeholder='Name', name='name')
+      .form-group
+        label Username
+        input.form-control(type='text', placeholder='Username', name='username')
+      .form-group
+        label Email
+        input.form-control(type='email', placeholder='Email', name='email')
+      .form-group
+        label Password
+        input.form-control(type='password', placeholder='Password', name='password')
+      .form-group
+        label Confirm Password
+        input.form-control(type='password', placeholder='Password', name='password2')
+      button.btn.btn-default(type='submit') Submit

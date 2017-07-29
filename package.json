@@ -1,0 +1,30 @@
+{
+  "name": "Blog",
+  "version": "1.0.0",
+  "description": "Simple Blog system",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "connect-flash": "*",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "^4.15.3",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "flash": "^1.1.0",
+    "moment": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "morgan": "~1.8.1",
+    "multer": "*",
+    "pug": "*",
+    "serve-favicon": "~2.4.2"
+  },
+  "author": "lokesh soni",
+  "license": "ISC"
+}
